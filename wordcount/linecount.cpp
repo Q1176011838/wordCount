@@ -4,7 +4,7 @@
 using namespace std;
 
 int lineCount(){
-	string str="\rfgsdfgsdg\rhgdfhh\rgfdsbgfd";  //inFile()调用输入函数返回值 
+	string str="\rfgsdfgsdg\rhgdfhh\rgfdsbgfd";  //result of inFile()
 		int n=str.size();
 		int linecount=0;
 		int temp=0;
