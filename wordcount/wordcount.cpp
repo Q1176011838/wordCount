@@ -23,7 +23,7 @@ typedef vector<int>vi;
 
 
 const int N=4e5+5;
-int ans_ch = 0,ans_word = 0;
+int ans_ch = 0,ans_word = 0,ans_line = 0;
 string in,out;
 int m = 1,n = 10;
 vector<string> str; 
@@ -110,18 +110,21 @@ void count(vector<string> V,int m,int n){
 void count_ch(string dir){
 	string now;
 	ifstream infile;
-	infile.open("./a.txt",ios::in);
+	infile.open(dir,ios::in);
 	while(!infile.eof()){
 		getline(infile,now,'\n');
+		bool f = false;
 		if(now !=""){
 			for(int i = 0 ;i<sz(now);++i){
-				
+				int dt = now[i];
+				if(dt > 32 && dt != 127) f = true;
 				if(now[i]<='Z' && now[i] >= 'A')
 					now[i]+=32;
 			}
 			str.push_back(now);
 			ans_ch+=sz(now);
 		}
+		if(f) ans_line++;
 		ans_ch++;
 	}
 	ans_ch--;
@@ -132,7 +135,7 @@ void print(){
 	fout.open(out,ios::out);
 	fout<<"characters: "<<ans_ch<<endl;
 	fout<<"words: "<<ans_word<<endl;
-	fout<<"lines: "<<sz(str);
+	fout<<"lines: "<<ans_line;
 	if(sz(ans_ph))fout<<endl; 
 	int cur = 0;
 	for(auto it:ans_ph){
@@ -173,4 +176,5 @@ int main(int argc,char *argv[]){
 	print();
 	
 	return 0;
-}
+} 
+
